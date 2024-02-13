@@ -358,10 +358,12 @@
        </div>
      <script>
       $(document).ready(function() {
+  // Function to check if it's the user's first visit by checking for the lastVisit cookie
   function isFirstVisit() {
-    return document.cookie.indexOf('lastVisit') === -1;
+    return document.cookie.split(';').some((cookie) => cookie.trim().startsWith('lastVisit='));
   }
 
+  // Function to get the value of the last visit from the cookie
   function getLastVisit() {
     const cookieArr = document.cookie.split(';');
     for (let i = 0; i < cookieArr.length; i++) {
@@ -373,29 +375,35 @@
     return null;
   }
 
+  // Function to set a cookie for the current visit
   function setLastVisitCookie() {
     const now = new Date();
-    const expirationDate = new Date(now.getTime() + (365 * 24 * 60 * 60 * 1000));
+    const expirationDate = new Date(now.getTime() + (365 * 24 * 60 * 60 * 1000)); // 1 year
     document.cookie = `lastVisit=${encodeURIComponent(now.toString())}; expires=${expirationDate.toUTCString()}`;
   }
 
+  // Function to display the welcome popup with appropriate message
   function displayPopup() {
     $('#welcomePopup').show();
   }
 
+  // Function to close the welcome popup
   function closePopup() {
     $('#welcomePopup').hide();
   }
 
+  // Check if it's the first visit, display the welcome message and set the cookie
   if (isFirstVisit()) {
     $('#welcomeMessage').text('Welcome to my homepage!');
     displayPopup();
+    setLastVisitCookie();
   } else {
+    // If not first visit, display the welcome back message with the last visit time
     const lastVisit = getLastVisit();
     $('#welcomeMessage').text(`Welcome back! Your last visit was ${lastVisit}`);
-    setLastVisitCookie();
   }
 
+  // Event listener for closing the welcome popup
   $('#closePopup').click(closePopup);
 });
      </script>
