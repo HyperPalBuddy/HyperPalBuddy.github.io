@@ -49,17 +49,9 @@
     // Set the cookie for the current visit
     setCookie("lastVisit", new Date(), 365); // Cookie expires in 365 days
   }
-
-  // Function to close the welcome popup
-  function closeWelcomePopup() {
-    document.getElementById("welcomePopup").style.display = "none";
-  }
 </script>
 </head>
 <body onload="displayWelcomeMessage()">
-  <div id="welcomePopup">
-    <h2 id="welcomeMessage"></h2>
-    <button id="closePopup" class="btn btn-primary" onclick="closeWelcomePopup()">Close</button>
-  </div>
+  <h2 id="welcomeMessage"></h2>
 </body>
 </html>
