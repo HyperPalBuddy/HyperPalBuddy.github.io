@@ -425,19 +425,20 @@
          <div class="columns-56 w-row">
             <div class="column-121 w-col w-col-3">
                <div id="comicContainer">
-                  <div id="comicTitle"></div>
-                  <img id="comicImage" src="" alt="XKCD Comic">
+                  <img id="Image" src="">
                </div>
 
                <script>
                   // Fetch data from XKCD API using jQuery
-                  $.getJSON('https://xkcd.com/info.0.json', function(data) {
+                  $.getJSON('https://picsum.photos/v2/list?page=2&limit=1', function(data) {
                     // Display comic title
                     console.log(data);
-                    $('#comicTitle').text(data.title);
+
+                    imgurl = data[0].url;
+                    console.log(imgurl)
                     // Display comic image
-                    $('#comicImage').attr('src', data.img);
-                    $('#comicImage').attr('alt', data.alt);
+                    $('#Image').attr('src', imgurl);
+
                   })
                   .fail(function(jqXHR, textStatus, errorThrown) {
                     console.error('Error fetching data:', textStatus, errorThrown);
